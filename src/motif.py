@@ -50,7 +50,7 @@ class SeqMotifType:
                  bounds=None,
                  filter_score=None,
                  note_str_func=default_note_str,
-                 #mutant_check= _mutant_check
+                 # mutant_check= _mutant_check
                  ** attribs
                  ):
         self.type = type
@@ -60,15 +60,15 @@ class SeqMotifType:
         self.note_str = note_str_func
         self.bounds = bounds
         self.score_type = score_type
-        #self.mutant_check = mutant_check
+        # self.mutant_check = mutant_check
         
         #------------------------------------------------
-        #FIRST: figure out what score type this motif is.
+        # FIRST: figure out what score type this motif is.
         #------------------------------------------------
         
-        #aho-corasick search tree
+        # aho-corasick search tree
         if self.score_type == 'acora':
-            #we need a score dict from a file and a separate acora object
+            # we need a score dict from a file and a separate acora object
             if not isinstance(score_dict, str):
                 raise NeedScoreDictFileException
             self.score_dict = \
@@ -77,27 +77,27 @@ class SeqMotifType:
             self.acora_tree = acora.AcoraBuilder(self.score_dict.keys()).build()            
             self.score = self.acora
         
-        #ternary search tree
+        # ternary search tree
         elif score_type == 'tst':
-            #make our file of nmers and scores a tst object
+            # make our file of nmers and scores a tst object
             self.score_dict = tst.TST()
             tstmap = lambda tuple: self.score_dict.put(*tuple)
             map(tstmap, ([record.split() for record in open(score_dict)]))
             
             self.score = self.tst
             
-        #max ent nmer score
+        # max ent nmer score
         elif score_type == 'max_ent':
             self.score_dict = {}
             self.score = self.max_ent
             
-            #open up an 'interactive' pipe to the maxent software for this motif
+            # open up an 'interactive' pipe to the maxent software for this motif
             programs = {'me_splice_donor':'score5', 'me_splice_acceptor':'score3'}
 
             self.command = cfg.programTemplate.substitute(path=cfg.maxEntPath,
                                         program=programs[self.type])           
             
-        #positon frequency matrix list
+        # positon frequency matrix list
         elif score_type == 'pfm':
             print "Loading position frequency matrices from {}...".format(self.type)
             pfm_glob = glob.glob(score_dict)
@@ -115,7 +115,7 @@ class SeqMotifType:
                     motif_obj.sd = \
                         ScoreDistribution(motif_obj, precision=10 ** 3)
                         
-                    #low false-positive rate to make sure motifs are real
+                    # low false-positive rate to make sure motifs are real
                     motif_obj.thresh = max(1, motif_obj.sd.threshold_fpr(0.01))            
             
             self.score = self.pfm
@@ -125,13 +125,13 @@ class SeqMotifType:
             
                 
         #------------------------------------------------
-        #SECOND: parse filter score information.
+        # SECOND: parse filter score information.
         #------------------------------------------------
         
-        #if filter score is an int, make it a lambda function that determines
-        #whether or not it is a 'worthwile' score; this could be as simple as 
+        # if filter score is an int, make it a lambda function that determines
+        # whether or not it is a 'worthwile' score; this could be as simple as 
         # > 0, or it could be a range, etc, etc. The lambda function will 
-        #return true if the score should be kept and false if it should not.
+        # return true if the score should be kept and false if it should not.
         
         if isinstance(self.filter_score, float) or \
             isinstance(self.filter_score, int):
@@ -146,12 +146,12 @@ class SeqMotifType:
                 lambda val, minmax = self.filter_score: \
                     val < minmax[0] or val > minmax[1]
         
-        #if filter_score is none, always return true
+        # if filter_score is none, always return true
         elif self.filter_score == None:
             self.filter_score = lambda val: True
        
         #------------------------------------------------
-        #THIRD: add motif to motif type dict and cleanup
+        # THIRD: add motif to motif type dict and cleanup
         #------------------------------------------------ 
         motif_types[self.type] = self
         self.attribs = attribs
@@ -184,11 +184,11 @@ class SeqMotifType:
         score function for motifs that are found by maxent (splice acceptors
         and donors. like all score functions, returns nmers, locations, scores
         '''
-        #print "Pre-score Subprocess state for {}: {}".format(self.type,self.p.poll())
+        # print "Pre-score Subprocess state for {}: {}".format(self.type,self.p.poll())
         nmers, locations = util.generate_nmers(string, self.bounds)
         scores = self.call_max_ent(nmers)
-        #print "Post-score Subprocess state for {}: {}".format(self.type, self.p.poll())
-        #print "\tDid we get scores? {}".format(len(scores) > 0)
+        # print "Post-score Subprocess state for {}: {}".format(self.type, self.p.poll())
+        # print "\tDid we get scores? {}".format(len(scores) > 0)
 
         
         return {'nmers': nmers, 'locations': locations, 'scores': scores}
@@ -222,7 +222,7 @@ class SeqMotifType:
         scores = float('-inf') * ones(len(nmer_list))
         new_nmer_idxes = []
         
-        #first, fill in precomputed scores, or mark new nmers for maxEnt run
+        # first, fill in precomputed scores, or mark new nmers for maxEnt run
         for nmer_i in range(len(nmer_list)):
             if nmer_list[nmer_i] in self.score_dict: 
                 scores[nmer_i] = self.score_dict[nmer_list[nmer_i]]
@@ -241,16 +241,16 @@ class SeqMotifType:
                                    cwd=cfg.maxEntPath,
                                    bufsize= -1) 
                     
-            #line after this comment is broken, fixed below
+            # line after this comment is broken, fixed below
             stdout_text, stderr_text = self.p.communicate(new_nmers_string)
             
-            #split the output into an array 
+            # split the output into an array 
             new_scores = array(stdout_text.splitlines())
-            #convert blank lines to -inf (they weren't long enough  to count) 
+            # convert blank lines to -inf (they weren't long enough  to count) 
             new_scores = where(new_scores == '', '-inf', new_scores)
-            #convert to float
+            # convert to float
             new_scores = map(float, new_scores)
-            #save new scores to old score list
+            # save new scores to old score list
             for new_nmer_i in range(len(new_nmer_idxes)):
                 new_nmer = nmer_list[new_nmer_idxes[new_nmer_i]]
                 if new_nmer not in self.score_dict:
@@ -296,6 +296,7 @@ class Wiggle:
         > $wig.idx
     done
     
+    (10/28/12 - thanks self from one year ago for writing this down!)
     '''
     
     def __init__(self, name, wiggle_dir, file_prefix,
@@ -308,10 +309,10 @@ class Wiggle:
         
         glob_components = (wiggle_dir, '/', file_prefix, '*', file_suffix)
         
-        #put all files into a list
+        # put all files into a list
         gzlist = glob.glob(''.join(glob_components))
         
-        #associate files into a dict by chromosome name
+        # associate files into a dict by chromosome name
         re_components = map(util.to_raw, glob_components)
         re_components[-2] = "(\w+)"
         
@@ -330,7 +331,7 @@ class Wiggle:
             dict([(chr, open(fn)) \
                   for chr, fn in self.idxnames.items()])
         
-        #load the indices into a dict of chrs
+        # load the indices into a dict of chrs
         self.chridx = {}
         for chr, fidxh in self.fidxhandles.items():
             self.chridx[chr] = [map(int, fl.split()) for fl in fidxh.readlines()]
@@ -349,7 +350,7 @@ class Wiggle:
         chrom 0 , start 1, end 2, strand 3, value 4.
         '''
         
-        start += 1 #to adjust for pythonic numbering
+        start += 1  # to adjust for pythonic numbering
         end += 2
         
         next_idx_line = 0
@@ -363,20 +364,20 @@ class Wiggle:
         next_idx_row = self.chridx[chr][next_idx_line]
         curr_idx_row = self.chridx[chr][curr_idx_line]
         
-        #if the start and end positions are not on the same set of wiggles
+        # if the start and end positions are not on the same set of wiggles
         if next_idx_row[2] <= end:
             raise ValueError("This region is not contiguous in the wig file!")
         
-        #if there are not enough lines in this wiggle set 
+        # if there are not enough lines in this wiggle set 
         if next_idx_row[0] - curr_idx_row[0] < end - curr_idx_row[2]:
             raise ValueError("This wiggle set is not large enough!")
         
-        #get seek position, number of lines to jump, and number of lines to keep
+        # get seek position, number of lines to jump, and number of lines to keep
         seekpos = curr_idx_row[1]
         jumplines = start - curr_idx_row[2]
         keeplines = end - start
         
-        #tups to keep: chrom 0 , start 1, end 2, strand 3, value 4.
+        # tups to keep: chrom 0 , start 1, end 2, strand 3, value 4.
         tups = []
 
         fh = self.fhandles[chr]
@@ -385,7 +386,7 @@ class Wiggle:
             fh.readline()
         
         for keep in range(keeplines):
-            #the start/end coords will be pythonic
+            # the start/end coords will be pythonic
             tups.append((chr, start + keep - 1, start + keep, '+', float(fh.readline())))
         
 #        if chr not in self.lookback_buffers:
@@ -466,7 +467,7 @@ Vlkr07_DICS = SeqMotifType(type='Vlkr07_DICS',
                                          'sequences/motifs/Voelker07/DI_CS.txt',
                             can_consolidate=True,
                             context='donor_intron',
-                            #aggregate= 'Ke2011',
+                            # aggregate= 'Ke2011',
                             no_print=True
                             )
 Vlkr07_AICS = SeqMotifType(type='Vlkr07_AICS',
@@ -477,7 +478,7 @@ Vlkr07_AICS = SeqMotifType(type='Vlkr07_AICS',
                                          'sequences/motifs/Voelker07/AI_CS.txt',
                             can_consolidate=True,
                             context='acceptor_intron',
-                            #aggregate= 'Ke2011',
+                            # aggregate= 'Ke2011',
                             no_print=True
                             )
 RBPmats = SeqMotifType(type='RBPmats',
@@ -490,7 +491,7 @@ RBPmats = SeqMotifType(type='RBPmats',
                                          'sequences/motifs/jaspar/dists.txt'
                             )
 
-#aggregate type explicit declarations
+# aggregate type explicit declarations
 agg_types = ['Ke2011']
 
 #===============================================================================

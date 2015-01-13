@@ -1,7 +1,7 @@
 import MySQLdb
 from interval import interval
 from cogent.db.ensembl import HostAccount, Genome
-#import cProfile
+# import cProfile
 
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
@@ -12,6 +12,7 @@ from Bio import SeqIO
 import ast
 import random
 import glob
+import pdb
 
 import motif
 import cfg
@@ -20,7 +21,7 @@ import stats
 ens_release = cfg.ens_release
 db = MySQLdb.connect(**cfg.ens_lcl_db_dict)
 
-#pycog = HostAccount(cfg.ens_lcl_db_dict['host'], 
+# pycog = HostAccount(cfg.ens_lcl_db_dict['host'], 
 #                    cfg.ens_lcl_db_dict['user'],
 #                    cfg.ens_lcl_db_dict['passwd'],
 #                    cfg.ens_lcl_db_dict['port'])
@@ -31,7 +32,7 @@ pycog_remote = HostAccount(cfg.ens_lcl_db_dict['host'],
                     cfg.ens_lcl_db_dict['port'])
 
 hs37 = Genome('human', Release=63, account=pycog_remote)
-#hs37_remote = Genome('human', Release=63, account=pycog_remote)
+# hs37_remote = Genome('human', Release=63, account=pycog_remote)
 
 
 def get_region(row_dict):
@@ -39,14 +40,14 @@ def get_region(row_dict):
 
 def type_me(str): 
     try: return ast.literal_eval(str) 
-    except: return str    
+    except: return str
 
-def categorize_exons(synth_size=170,
-                     us_min=40,
-                     ds_min=30,
-                     intron_padding=50,
-                     number_to_mutate=305,
-                     max_spots=26890):
+def categorize_exons(synth_size=cfg.chip_synth_length,
+                     us_min=cfg.chip_us_min,
+                     ds_min=cfg.chip_ds_min,
+                     intron_padding=cfg.chip_intron_padding,
+                     number_to_mutate=cfg.chip_number_to_mutate,
+                     max_spots=cfg.chip_feature_count):
     '''
     for each gene:
     1. get all CCDS transcripts (if no CCDS transcripts, then skip)
@@ -67,11 +68,11 @@ def categorize_exons(synth_size=170,
 
     '''
     
-    #open files
+    # open files
     exon_file = open(cfg.ens_exon_fn)
     stats_file = open(cfg.ens_exon_stats, 'w')
             
-    #set up counts dict
+    # set up counts dict
     counts = dict()
     counts['skip_size'] = 0
     counts['valid'] = 0
@@ -82,24 +83,28 @@ def categorize_exons(synth_size=170,
     counts['cut_sites'] = 0
     counts['dup_seq'] = 0
     
-    #keep track of all 170mers
+    # keep track of all 170mers
     
     seen_seqs = set()
     
-    skip_exons = dict() #list of exons to skip due to copies or being subsumed
-    overlap_exons = dict() #list of exons to skip due to being overlapped
+    skip_exons = dict()  # list of exons to skip due to copies or being subsumed
+    overlap_exons = dict()  # list of exons to skip due to being overlapped
     
     exon_dict_keys = exon_file.readline().split()
     
     all_exons = exon_file.readlines()
     
-    #get random sample to perform mutations on
+    pdb.set_trace()
+    
+    # get random sample to perform mutations on
     random.seed(1)
     sample_indices = sorted(random.sample(range(len(all_exons)),
                             number_to_mutate)) 
         
-    #for ccds_ex in get_ccds_exons(100):   # <if we want to get them from mySQL
-    for i, ccds_ex in enumerate(all_exons):# <if we want to get them from a file
+    # \/ if we want to get them from mySQL        
+    # for i, ccds_ex in enumerate(get_ccds_exons(synth_size - us_min - ds_min)):
+    # \/ if we want to get them from a file  
+    for i, ccds_ex in enumerate(all_exons):
 
         #------------------------------------------------------------------
         # 0. Keep time, running count, print every 50 exons
@@ -117,8 +122,8 @@ def categorize_exons(synth_size=170,
         # 1. Prepare CCDS_Ex exon record
         #------------------------------------------------------------------
         
-        #if we are taking records from a file instead of mysql, then
-        #split,map,zip into a dict         
+        # if we are taking records from a file instead of mysql, then
+        # split,map,zip into a dict         
         ccds_ex = map(type_me, ccds_ex.split())
         ccds_ex = dict(zip(exon_dict_keys, ccds_ex))
         
@@ -132,7 +137,7 @@ def categorize_exons(synth_size=170,
         #     subsumed, overlapped, or identical
         #------------------------------------------------------------------
         
-        #if 'ENSE00001316627' not in ccds_ex['exon']: continue
+        # if 'ENSE00001316627' not in ccds_ex['exon']: continue
         
         for fg in glob.glob(cfg.ens_fas_dir + '*'):
             if ccds_ex['exon'] in fg:
@@ -161,10 +166,10 @@ def categorize_exons(synth_size=170,
         # 3. Get Region To Synthesize
         #------------------------------------------------------------------
 
-        #synth_size is region to make, not counting primers/RE sites
-        #us_min and ds_min are upstream and downstream minimums
+        # synth_size is region to make, not counting primers/RE sites
+        # us_min and ds_min are upstream and downstream minimums
         
-        #skip if the exon plus us_min and ds_min is too large
+        # skip if the exon plus us_min and ds_min is too large
         min_synth_size = ccds_ex['len'] + us_min + ds_min
         if min_synth_size > synth_size:
             counts['skip_size'] += 1
@@ -172,11 +177,11 @@ def categorize_exons(synth_size=170,
         
         synth_remainder, odd = divmod(synth_size - min_synth_size, 2) 
         
-        #if the exon is on strand -1, then we need to switch us and ds
+        # if the exon is on strand -1, then we need to switch us and ds
         if ccds_ex['strand'] == 1:
             synth_us = us_min + synth_remainder + odd
             synth_ds = ds_min + synth_remainder
-        else: #opposite strand, switch us and ds
+        else:  # opposite strand, switch us and ds
             synth_us = ds_min + synth_remainder
             synth_ds = us_min + synth_remainder + odd
                     
@@ -199,27 +204,27 @@ def categorize_exons(synth_size=170,
             re_ex['invalid'] = False
             re_ex['class'] = 'error'
             
-            #region exon (this loop)
+            # region exon (this loop)
             re_ivl = interval[re_ex['start'], re_ex['end']]
-            #ccds exon (outer loop exon)
+            # ccds exon (outer loop exon)
             ce_ivl = interval[ccds_ex['start'], ccds_ex['end']]
-            #synthesized region
+            # synthesized region
             sr_ivl = interval[synth_region['start'], synth_region['end']]
-            #flanking synthesized region
+            # flanking synthesized region
             fr_ivl = sr_ivl + interval(-50, 50)
             
             isiz = lambda ivl: ivl[0][1] - ivl[0][0]
 
-            #look for situations that we want to avoid
+            # look for situations that we want to avoid
             #3.1 CCDS Identical=================================================
-            #exons that have the same start and end
+            # exons that have the same start and end
             if re_ivl == ce_ivl:
                 re_ex['class'] = 'identical'
                 skip_exons[re_ex['exon']] = 1
                 ccds_ex['identical'].append(re_ex['exon'])
                 re_ex['invalid'] = False                
             #3.2 CCDS Subsumes==================================================
-            #exons that this exon subsumes
+            # exons that this exon subsumes
             # starts and ends inside of exon
             elif re_ivl in ce_ivl:
                 re_ex['class'] = 'subsumes'
@@ -227,45 +232,45 @@ def categorize_exons(synth_size=170,
                 ccds_ex['subsumed'].append(re_ex['exon'])
                 re_ex['invalid'] = False                
             #3.3 CCDS is Subsumed===============================================
-            #exons that subsume this exon:
+            # exons that subsume this exon:
             #  starts and ends outside of exon
             elif ce_ivl in re_ivl:
                 re_ex['class'] = 'subsumed'
                 re_ex['invalid'] = True
             #3.4 Exon Overlap===================================================
-            #exons that overlap this exon:
-            #starts in middle, ends after or ends in middle, starts after
+            # exons that overlap this exon:
+            # starts in middle, ends after or ends in middle, starts after
             elif (re_ivl[0][0] in ce_ivl and re_ivl[0][1] > ce_ivl[0][1])  \
                or (re_ivl[0][1] in ce_ivl and re_ivl[0][0] < ce_ivl[0][0]):
                 re_ex['class'] = 'overlapped'
                 re_ex['invalid'] = True
                 overlap_exons[re_ex['exon']] = 1 
             #3.5 Invasion=======================================================
-            #exons that invade this exon's synthesized region
+            # exons that invade this exon's synthesized region
             elif re_ivl[0][0] in sr_ivl or re_ivl[0][1] in sr_ivl:
                 re_ex['class'] = 'invaded'
                 re_ex['invalid'] = True      
             #3.6 Flank Invasion=================================================
-            #exons whose flanks (50 bases) invade this exon's 
+            # exons whose flanks (50 bases) invade this exon's 
             # synthesized region
             elif re_ivl[0][0] in fr_ivl or re_ivl[0][1] in fr_ivl:
                 re_ex['class'] = 'flank_invaded'
                 re_ex['invalid'] = True                   
             #===================================================================
             
-            #FINALLY: outer loop exon invalid if subsumed, overlapped, invaded                        
+            # FINALLY: outer loop exon invalid if subsumed, overlapped, invaded                        
             if re_ex['invalid']:
                 ccds_ex['invalid'] = True
                 ccds_ex['class'].append(re_ex['class'])
             
-        #update class counts                
+        # update class counts                
         for exclass in ccds_ex['class']:    
             if exclass in counts:
                 counts[exclass] += 1
             else:
                 counts[exclass] = 1
                 
-        #skip ccds exon if invalid
+        # skip ccds exon if invalid
         if not ccds_ex['invalid']: 
             counts['valid'] += 1
             print "%s\tOK" % ccds_ex['exon']
@@ -275,24 +280,24 @@ def categorize_exons(synth_size=170,
             continue
         
         try:
-            #only annotate & mutate if this exon is in the sample_indices set
+            # only annotate & mutate if this exon is in the sample_indices set
             mutate_this = i in sample_indices
             
             #-------------------------------------------------------------------
             # 4. Get Seq Features and SNPs
             #-------------------------------------------------------------------
-            #finally, make our exon into a bonafide splicemod SeqRecord
+            # finally, make our exon into a bonafide splicemod SeqRecord
             exon_record = make_seq_record(ccds_ex,
                                           skip_annotation=not mutate_this)
                         
-            #check for cut sites
+            # check for cut sites
             for cs in cfg.cut_sites:
                 if cs in exon_record.seq:
                     print " HAS {}".format(cs)                    
                     counts['cut_sites'] += 1
                     raise ValueError
             
-            #check if an identical exon has been already seen
+            # check if an identical exon has been already seen
             if str.upper(exon_record.seq.tostring()) in seen_seqs:
                 print " DUPLICATED"
                 counts['dup_seq'] += 1
@@ -301,13 +306,13 @@ def categorize_exons(synth_size=170,
             #-------------------------------------------------------------------
             # 5. Make a list of mutants from MutantCategories
             #-------------------------------------------------------------------
-            #make an attribute to store mutants in this seq record
+            # make an attribute to store mutants in this seq record
             exon_record.mutants = {}
-            if mutate_this:    
+            if mutate_this:
                 #5.1 Get Statistics=============================================
                 exon_record.stats = stats.SRStats(exon_record)
                 stats_str = str(exon_record.stats)
-                #if this is the first stats str, print the header first
+                # if this is the first stats str, print the header first
                 if stats_file.tell() == 0:
                     stats_file.write(exon_record.stats.header() + "\n")
                 stats_file.write(stats_str + "\n")
@@ -318,7 +323,7 @@ def categorize_exons(synth_size=170,
             # 6. Save to FASTA and GBK formats
             #------------------------------------------------------------------
  
-            #this writes all of our mutants to genbank and fasta files
+            # this writes all of our mutants to genbank and fasta files
             exon_record.save_all_mutants(gb=mutate_this, fas=True)
             seen_seqs.add(str.upper(exon_record.seq.tostring()))
                         
@@ -326,7 +331,7 @@ def categorize_exons(synth_size=170,
             print "EXON {} SKIPPED".format(exon_record.id)
 
     #---------------------------------------------------------------------------
-    #Print final counts at the end:        
+    # Print final counts at the end:        
     print "Final Counts:\n"
     for key in counts.keys():   
         print "F\t%s:\t%d" % (key, counts[key])
@@ -346,7 +351,8 @@ def add_wiggle_data(exon_record):
         if exon_record.annotations['strand'] == -1:
             values = list(reversed(values))
         
-        if len(values) != 170: raise ValueError("Wiggle track not long enough")
+        if len(values) != cfg.chip_synth_length:
+            raise ValueError("Wiggle track not long enough")
             
         exon_record.add_wiggle_track(wig_tr.name, map(lambda v: v[4], values))
     
@@ -355,20 +361,20 @@ def make_seq_record(exon, skip_annotation=False):
         new seq record with all the bells and whistles. add in the predicted
         exon start and ends and splice sites as well.
     '''
-    #GET SEQ FROM PYCOGENT
+    # GET SEQ FROM PYCOGENT
     #===========================================================================
     cog_reg = hs37.getRegion(CoordName=exon['chr'],
                                  Start=exon['synth_start'] - 1,
                                    End=exon['synth_end'])
     cog_seq = cog_reg.Seq
     
-    #reverse complement if necessary
+    # reverse complement if necessary
     if exon['strand'] == -1:
         cog_seq = cog_seq.rc()
     seq = cog_seq._seq
     
     if not skip_annotation:
-    #DO SNPS
+    # DO SNPS
     #===========================================================================
         var = hs37.getFeatures(feature_types='variation', region=cog_reg)
         exon['snps'] = []
@@ -376,18 +382,18 @@ def make_seq_record(exon, skip_annotation=False):
             if snp.Alleles != 'HGMD_MUTATION':
                 exon['snps'].append(snp)
     
-    #TODO: APPEND OUTER INTRON CONTEXT
+    # TODO: APPEND OUTER INTRON CONTEXT
     #===========================================================================
-    #use the cfg information to get sequence, how much to add
+    # use the cfg information to get sequence, how much to add
     
-    #MAKE SEQ RECORD
+    # MAKE SEQ RECORD
     #===========================================================================            
-    #create the seqRecord object, adding the exon dict as annotation fields
+    # create the seqRecord object, adding the exon dict as annotation fields
     record = SeqRecord(Seq(seq, generic_dna), id=exon['exon'],
                        annotations=exon)
     
-    #add the exon features and putative splicing features, set the source as
-    #ensembl_exon (not splicemod, so that it doesn't get deleted)
+    # add the exon features and putative splicing features, set the source as
+    # ensembl_exon (not splicemod, so that it doesn't get deleted)
     
     if exon['strand'] == 1:
         in_front = exon['synth_us']
@@ -511,7 +517,7 @@ def get_ccds_exons(max_size):
          exts.transcript_id = ts.transcript_id and   #transcript to exon
          ex.phase = 0 and                            #phase
          ex.end_phase = 0 and
-         ((ex.seq_region_end - ex.seq_region_start + 1) > 12 OR 
+         ((ex.seq_region_end - ex.seq_region_start + 1) > 12 AND 
           (ex.seq_region_end - ex.seq_region_start + 1) < %d) and
          tsid.transcript_id = ts.transcript_id and   #transcript stable id
          exsid.exon_id = ex.exon_id and              #exon stable id
@@ -524,7 +530,7 @@ def get_ccds_exons(max_size):
     cursor = db.cursor(MySQLdb.cursors.DictCursor) 
     cursor.execute(ccds_exons_query)
     return cursor
-    
+
 def main():
     print "Running through all exons...\n"
     categorize_exons()
