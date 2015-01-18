@@ -5,7 +5,7 @@ import collections
 import random
 import functools
 
-from interval import interval, inf, imath
+from interval import interval, inf
 
 #from http://svn.colorstudy.com/home/ianb/ruby_blocks.py
 def magic_set(obj):
@@ -115,22 +115,22 @@ class memoized(object):
         return functools.partial(self.__call__, obj)
 
 def range_dist(m, range):
-    '''given a value 'm' and a range of values as a tuple 'range', give the 
+    '''given a value 'm' and a range of values as a tuple 'range', give the
        absolute distance of m from the middle of this range.
-    ''' 
+    '''
     r_mean = sum(range) / 2
     return abs(m - r_mean)
 
 def mod_str(s, slice, repl):
-    '''given a slice of the string to modify, the original string, 
+    '''given a slice of the string to modify, the original string,
        and a replacement, return a new string with the area in the slice region
        replaced
     '''
     return s[:slice.start] + repl + s[slice.stop:]
 
 def find_all(str, substr):
-    '''given a string and a substring, return all occurrences of the substring 
-       inside the string as a tuple of ints, corresponding to the starting 
+    '''given a string and a substring, return all occurrences of the substring
+       inside the string as a tuple of ints, corresponding to the starting
        position of the substr
     '''
     starts = ()
@@ -141,34 +141,34 @@ def find_all(str, substr):
     return starts
 
 def generate_nmers(seq, bounds):
-    '''generate a list of n-mers at each position in the seq (a string), relative 
+    '''generate a list of n-mers at each position in the seq (a string), relative
     to each position i, and remove any substrings that are too short
     '''
-    
+
     #if one bound, start at 0 rel to i
     if len(bounds) == 1:
-        bounds = (0,) + bounds 
+        bounds = (0,) + bounds
     elif len(bounds) != 2:
         raise BoundsException
-    
+
     motif_len = bounds[1] - bounds[0]
     str_list = []
     loc_list = []
-    
+
     for i in range(len(seq)):
-        
+
         i_bounds = (bounds[0] + i, bounds[1] + i)
         i_slice = slice(*i_bounds)
         #generate n-mers from bounds relative to position i
         if len(seq[i_slice]) >= motif_len:
             str_list.append(str(seq[i_slice]))
             loc_list.append(i_bounds)
-        
+
     return (str_list, loc_list)
 
 def to_raw(plain_str):
     '''
-    This simple function converts a string into a raw string literal so that, 
+    This simple function converts a string into a raw string literal so that,
     for instance, regular expressions do not mistake a literal '.' for a 'match
     anything' character.
     '''
@@ -187,13 +187,13 @@ def max_none(iterable):
 
 @magic_set(interval)
 def invert(self):
-    ''' 
+    '''
     separates all the components and takes the intersection of their individual
     inverses
     '''
-    
+
     ivls = []
-    
+
     inverse_func = lambda cmp: interval([-inf, cmp[0][0]], [cmp[0][1], inf])
     inverses = map(inverse_func, self.components)
     return reduce(lambda x, y: x & y, inverses, interval((-inf, inf)))
@@ -226,10 +226,10 @@ def irandomize(iterable, bufsize=1000, seed=1):
             yield item
         raise StopIteration
 
-@magic_set(interval)    
+@magic_set(interval)
 def overlaps(self, ivl2):
     '''
-    A & B returns true if there is one point the same, i,e between 
+    A & B returns true if there is one point the same, i,e between
     (a,b) and (b,c), but we only want to return true if these intervals have
     some non-empty space in common, not just one point.
     '''
@@ -237,32 +237,32 @@ def overlaps(self, ivl2):
     return bool((isct and len(isct) >= 1 and (isct[0][1] - isct[0][0]) > 0))
 
 def str_diff(str1, str2, case_sensitive=True):
-    ''' 
+    '''
     for two strings of the same length, tells you positions that are different
     case sensitive by default!
     '''
-    
+
     if not case_sensitive:
         str1 = str1.upper()
         str2 = str2.upper()
-    
+
     diffs = ()
-    
+
     if len(str1) != len(str2): return ValueError
     if str1 == str2: return ()
     for i in range(len(str1)):
         if str1[i] != str2[i]: diffs += (i,)
-    return diffs 
+    return diffs
 
 def shuffle_and_return(sequence):
     random.shuffle(sequence)
     return sequence
 
-@magic_set(interval)  
+@magic_set(interval)
 def sum_len(self):
     ''' this gives the summed length of every component of the interval. '''
     ivl_len = 0
     for comp in self:
         ivl_len += comp[1] - comp[0]
     return ivl_len
-    
+

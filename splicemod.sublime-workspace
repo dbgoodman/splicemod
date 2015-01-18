@@ -1,0 +1,641 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"_update",
+				"_update_experiment_sample_parentage"
+			],
+			[
+				"update",
+				"update_parent_child_variant_fields"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 247.0,
+		"selected_items":
+		[
+			[
+				"status",
+				"Git: Status"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"packagecontrol install",
+				"Package Control: Install Package"
+			],
+			[
+				"package control install",
+				"Package Control: Install Package"
+			],
+			[
+				"package control",
+				"Package Control: Install Package"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"package",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 476.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/dbg/Dropbox/Projects/old/intron/code/splicemod_dg"
+	],
+	"file_history":
+	[
+		"/Users/dbg/Dropbox/projects/old/intron/code/splicemod_dg/README.md",
+		"/Users/dbg/Dropbox/projects/old/intron/code/splicemod_dg/src/score_exons.py",
+		"/Users/dbg/Dropbox/projects/old/intron/code/splicemod_dg/score_exons.py",
+		"/Users/dbg/Dropbox/projects/old/intron/code/splicemod_dg/src/feature.py",
+		"/Users/dbg/software/millstone/README.md",
+		"/Users/dbg/software/millstone/jbrowse/extlib/lib/perl5/XML/RegExp.pm",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/unit_testing/tests_onhold/1_dom/oLanguage.sSearch.js",
+		"/Users/dbg/software/millstone/genome_designer/tools/snpEff/galaxy/tool_conf.xml",
+		"/Users/dbg/software/millstone/genome_designer/utils/tests/test_optmage_util.py",
+		"/Users/dbg/software/millstone/genome_designer/main/templates/sample_list_targets_template.tsv",
+		"/Users/dbg/software/millstone/genome_designer/test_data/import_util_test_data/sample_list_mac_linebreaks.tsv",
+		"/Users/dbg/software/millstone/genome_designer/test_data/fake_genome_and_reads/test_genome_sample_targets.tsv",
+		"/Users/dbg/software/millstone/genome_designer/main/templates/controls/create_samples_from_server_location_modal.html",
+		"/Users/dbg/software/millstone/genome_designer/test_data/import_util_test_data/sample_list_browser_upload_test_data_zipped.tsv",
+		"/Users/dbg/software/millstone/genome_designer/main/models.py",
+		"/Users/dbg/software/millstone/genome_designer/main/testing_util.py",
+		"/Users/dbg/software/millstone/genome_designer/pipeline/tests/test_variant_calling.py",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/jquery_file_upload/.gitignore",
+		"/Users/dbg/software/millstone/genome_designer/tools/snpEff/galaxy/snpSift_int.xml",
+		"/Users/dbg/software/millstone/genome_designer/conf/global_settings.py",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/extras/TableTools/multi_instance.html",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/extras/ColReorder/media/docs/46848f6f3b.html",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/unit_testing/tests_onhold/1_dom/6776-scrolling-table-grows.js",
+		"/Users/dbg/software/millstone/genome_designer/tools/fastqc/Help/3 Analysis Modules/1 Basic Statistics.html",
+		"/Users/dbg/software/millstone/genome_designer/utils/tests/test_import_util.py",
+		"/Users/dbg/software/millstone/genome_designer/test_data/import_util_test_data/sample_list_targets_extra_col.tsv",
+		"/Users/dbg/software/millstone/genome_designer/test_data/import_util_test_data/sample_list_targets_with_duplicates.tsv",
+		"/Users/dbg/software/millstone/genome_designer/test_data/import_util_test_data/sample_list_browser_upload_test_data.tsv",
+		"/Users/dbg/software/millstone/genome_designer/test_data/import_util_test_data/sample_list_browser_upload_test_data__unpaired.tsv",
+		"/Users/dbg/software/millstone/genome_designer/utils/import_util.py",
+		"/Users/dbg/software/millstone/genome_designer/test_data/import_util_test_data/sample_list_targets_template_no_extra_col.tsv",
+		"/Users/dbg/software/millstone/genome_designer/main/static/js/sample_list_view.js",
+		"/Users/dbg/software/millstone/genome_designer/main/templates/sample_list.html",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/sample.c",
+		"/Users/dbg/software/millstone/genome_designer/test_data/full_vcf_test_set/sample0.fa",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/samtools",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/unit_testing/tests_onhold/1_dom/sAjaxSource.js",
+		"/Users/dbg/software/millstone/genome_designer/settings.py",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/bam_import.c",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/bootstrap-select/bootstrap-select.css",
+		"/Users/dbg/software/millstone/genome_designer/main/model_utils.py",
+		"/Users/dbg/software/millstone/genome_designer/temp_data/projects/0c7ce02e/variant_sets/d055004a/designed_snps.vcf",
+		"/Users/dbg/software/millstone/genome_designer/main/context_processors.py",
+		"/Users/dbg/software/millstone/genome_designer/main/templates/project_create.html",
+		"/Users/dbg/software/millstone/genome_designer/debug/profiler.py",
+		"/Users/dbg/software/millstone/genome_designer/pipeline/pipeline_runner.py",
+		"/Users/dbg/software/millstone/genome_designer/debug/2014_03_17_recoli_test.tsv",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/unit_testing/tests_onhold/1_dom/fnSetColumnVis.js",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/unit_testing/tests_onhold/1_dom/2914-state-save-sort.js",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/sam_view.c",
+		"/Users/dbg/software/millstone/genome_designer/tests/integration/test_sv_pipeline.py",
+		"/Users/dbg/software/millstone/genome_designer/pipeline/tests/test_sv_calling.py",
+		"/Users/dbg/software/millstone/genome_designer/main/static/js/analyze/tab_analyze_subview_variants.js",
+		"/Users/dbg/software/millstone/genome_designer/test_suite_runner.py",
+		"/Users/dbg/software/millstone/genome_designer/test_data/import_util_test_data/sample_list_browser_upload_test_data__repeated_filename.tsv",
+		"/Users/dbg/software/millstone/genome_designer/variants/common.py",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/INSTALL",
+		"/Users/dbg/software/millstone/genome_designer/test_data/genbank_aligned/bwa_align_annotated.vcf",
+		"/Users/dbg/software/millstone/genome_designer/test_data/fake_genome_and_reads/test_genome_snps.vcf",
+		"/Users/dbg/software/millstone/genome_designer/temp_data/tmp/tmpeodMDB_new.vcf",
+		"/Users/dbg/software/millstone/genome_designer/test_data/full_vcf_test_set/designed_snps.vcf",
+		"/Users/dbg/software/millstone/genome_designer/test_data/vcf_template.vcf",
+		"/Users/dbg/software/millstone/genome_designer/test_data/full_vcf_test_set/template.vcf",
+		"/Users/dbg/software/millstone/genome_designer/test_data/discordant_split_reads/lumpy.vcf",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/__MACOSX/misc/._vcfutils.lua",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/__MACOSX/bcftools/._vcfutils.pl",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/__MACOSX/bcftools/._vcf.c",
+		"/Users/dbg/software/millstone/genome_designer/tools/fastqc/__MACOSX/._Configuration",
+		"/Users/dbg/software/millstone/genome_designer/test_data/full_vcf_test_set/generate_full_vcf_test_set.py",
+		"/Users/dbg/software/millstone/genome_designer/scripts/bootstrap_large_vcf_example.py",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/extras/FixedColumns/col_filter.html",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/extras/ColReorder/col_filter.html",
+		"/Users/dbg/software/millstone/genome_designer/tools/snpEff/scripts/vcfEffOnePerLine.pl",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/misc/vcfutils.lua",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/bcftools/vcfutils.pl",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/bcftools/vcf.c",
+		"/Users/dbg/software/millstone/genome_designer/variants/vcf_parser.py",
+		"/Users/dbg/software/millstone/genome_designer/main/consistency.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/tests/test_dynamic_snp_filter_key_map.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/dynamic_snp_filter_key_map.py",
+		"/Users/dbg/software/millstone/genome_designer/default.log",
+		"/Users/dbg/software/millstone/genome_designer/variants/tests/test_vcf_parser.py",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_models.py",
+		"/Users/dbg/software/millstone/genome_designer/tools/fastqc/__MACOSX/org/apache/commons/math3/._exception",
+		"/Users/dbg/software/millstone/genome_designer/tools/fastqc/__MACOSX/org/apache/commons/._math3",
+		"/Users/dbg/software/millstone/genome_designer/variants/tests/test_variant_sets.py",
+		"/Users/dbg/software/millstone/genome_designer/pipeline/tests/test_variant_effects.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/tests/test_common.py",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_model_views.py",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_xhr_handlers.py",
+		"/Users/dbg/software/millstone/genome_designer/pipeline/tests/test_read_alignment.py",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_views.py",
+		"/Users/dbg/software/millstone/genome_designer/tools/samtools/bcftools/main.c",
+		"/Users/dbg/software/millstone/genome_designer/manage.py",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/scripts/unit_tests.sh",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/src/api/api.internal.js",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/extras/TableTools/alt_init.html",
+		"/Users/dbg/software/millstone/genome_designer/main/template_xhrs.py",
+		"/Users/dbg/software/millstone/genome_designer/main/__init__.py",
+		"/Users/dbg/software/millstone/genome_designer/pipeline/variant_calling/common.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/tests/test_materialized_variant_filter.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/tests/test_materialized_view_manager.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/tests/test_melted_variant_schema.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/tests/__init__.py",
+		"/Users/dbg/software/millstone/genome_designer/pipeline/variant_effects.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/variant_sets.py",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/extras/ColVis/media/css/ColVisAlt.css",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/unit_testing/tests_onhold/1_dom/aoColumns.sName.js",
+		"/Users/dbg/software/millstone/genome_designer/main/templates/controls/variant_set_list_controls.html",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_consistency.py",
+		"/Users/dbg/software/millstone/genome_designer/test_data/fake_genome_and_reads/test_genome_variant_set.vcf",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_nose.py",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_s3.py",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_signals.py",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_upload_template_views.py",
+		"/Users/dbg/software/millstone/genome_designer/main/templates/controls/sample_list_controls.html",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/jquery_file_upload/test/test.js",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/test_adapters.py",
+		"/Users/dbg/software/millstone/genome_designer/tests/test_settings.py",
+		"/Users/dbg/software/millstone/genome_designer/testing_utils/sv_testing_utils.py",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/unit_testing/tests_onhold/1_dom/aoColumns.sTitle.js",
+		"/Users/dbg/software/millstone/genome_designer/main/static/vendor/DataTables-1.9.4/media/unit_testing/tests_onhold/1_dom/-complex_header.js",
+		"/Users/dbg/software/millstone/genome_designer/pipeline/read_alignment.py",
+		"/Users/dbg/software/millstone/genome_designer/scripts/run_integration_tests.sh",
+		"/Users/dbg/software/millstone/genome_designer/main/tests/__init__.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/filter_eval_result.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/filter_key_map_constants.py",
+		"/Users/dbg/software/millstone/genome_designer/variants/filter_scope.py"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"",
+			"*.py",
+			"",
+			"*.py",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"generate_all_mutants",
+			"mutate_",
+			"generate_all_mutants",
+			"mutate",
+			"my",
+			"save_all_mutants",
+			"make_seq_record",
+			"interval",
+			"make_seq_record",
+			"interval",
+			"(interval",
+			"interval\\(",
+			"interval\\.",
+			"interval",
+			"imath",
+			"interval",
+			"sort_rmdup_cmd",
+			"test_genome_8.snps.simLibrary.1.fq[^.]",
+			"test_genome_8.snps.simLibrary.1.fq",
+			"test_genome_8.snps.simLibrary.2.fq",
+			"fake_genome_and_reads",
+			"NUM_SAMPLES_IN_TEMPLATE",
+			"get_dataset_with",
+			"FASTQC",
+			"fastqc",
+			".fq",
+			"TARGETS_TEMPLATE_FILEPATH",
+			"fastqc",
+			"fastqc_filename",
+			"run_fastqc_on_sample_fastq",
+			"fastqc",
+			"get_or_create_variant",
+			"get_all_fields",
+			"key_to_parent_map",
+			"json",
+			".data",
+			"process_sam_bam_file",
+			"update_parent_child_variant_fields",
+			"get_or_create_variant",
+			"FullVCFTestSet",
+			"full_vcf_test",
+			"mg1655",
+			"SAMPLE_PARENT_SAMPLES",
+			"PARENT_SAMPLES",
+			"sample_list_targets_template.tsv",
+			"SAMPLE_PARENTS",
+			"_update_experiment_sample_data_for_row",
+			"PRE_DEFINED_SAMPLE_SERVER_COPY_HEADER_PARTS",
+			"_update_experiment_sample_parentage",
+			"_update_experiment_sample_parentage\n",
+			"_update_experiment_sample_parentage\n_update_experiment_sample_parentage",
+			"_update_experiment_sample_parentage",
+			"create_samples_from_row_data",
+			"parse_experiment_sample_targets_file",
+			"_update_experiment_sample_data_for_row",
+			"create_samples_from_row_data",
+			"parse_experiment_sample_targets_file",
+			"SAMPLE_",
+			"parse_experiment_sample_targets_file",
+			"TEST_GENOME_SNPS",
+			"import .* Variantcallercommon",
+			"AlignmentGroup.get_or_create",
+			"VariantCallerCommonData",
+			"update_parent_child_variant_fields",
+			"(\n",
+			"'sample'",
+			"sample",
+			"AlignmentGroup",
+			"AlignmentGorup",
+			"create_common_entities_w_variants",
+			"copy_and_add_dataset_source",
+			"TEST_GENOME_SNPS",
+			"EXPECTED_VARIANT_POSITIONS",
+			"test_default_freebayes",
+			"spot.*test",
+			"spot",
+			"spot test",
+			"class Variant",
+			"VariantEvidence",
+			"variant",
+			"VariantEvidence",
+			"samplerelation",
+			"relation",
+			"parents",
+			"SampleRelation",
+			"Relationship",
+			"common_entities",
+			"create_common_entities",
+			"ExperimentSample",
+			"get_or_create_variant",
+			"parent",
+			"sp",
+			"Dataset",
+			"realign_given_indels",
+			"gatk",
+			"GATK",
+			"realign_given_indels",
+			"rmdup",
+			"raise",
+			"sort",
+			"'(\\w+)':",
+			"AlignmentGroup",
+			"process_sam_bam_file",
+			"DEFAULT_PROCESSING_MASK",
+			"indel_realigner",
+			"DESIGNED",
+			"Designed",
+			"g3n3d3z",
+			"Chromosome",
+			"U00096",
+			"(\\d)\\t([ATGC])",
+			"2066972",
+			"633969",
+			"(\\d+)\\s+",
+			"gdv2db",
+			"PORT",
+			"local_settings",
+			"local_settings.py",
+			"local_Settings",
+			"local_Sett",
+			"local_asettings",
+			"cambridge"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"Interval",
+			"Interval\\(",
+			".fq.gz",
+			"Parents",
+			"'samples'",
+			"$1 :",
+			"U00096",
+			"Chromosome",
+			"$1\\t.\\t$2",
+			">esvelt_seq_$1\\n"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git-commit":
+	{
+		"height": 100.0
+	},
+	"project": "splicemod.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"ensembl",
+				"~/Dropbox/projects/old/intron/code/splicemod_dg/src/ensembl.py"
+			],
+			[
+				"featre",
+				"~/Dropbox/projects/old/intron/code/splicemod_dg/src/feature.py"
+			],
+			[
+				"read_alignment",
+				"genome_designer/pipeline/read_alignment.py"
+			],
+			[
+				"millstone_set",
+				"millstone_setup.py"
+			],
+			[
+				"import_util",
+				"utils/import_util.py"
+			],
+			[
+				"sample_list_targets_template.tsv",
+				"main/templates/sample_list_targets_template.tsv"
+			],
+			[
+				"sample_list_mac_linebreaks.tsv",
+				"test_data/import_util_test_data/sample_list_mac_linebreaks.tsv"
+			],
+			[
+				"millstone",
+				"millstone_setup.py"
+			],
+			[
+				"gitstatus",
+				"*git-status*: millstone"
+			],
+			[
+				"test_import",
+				"utils/tests/test_import_util.py"
+			],
+			[
+				"models",
+				"main/models.py"
+			],
+			[
+				"sample_list_browser_upload_test_data_zipped.tsv",
+				"test_data/import_util_test_data/sample_list_browser_upload_test_data_zipped.tsv"
+			],
+			[
+				"millstone_",
+				"millstone_setup.py"
+			],
+			[
+				"impor",
+				"utils/import_util.py"
+			],
+			[
+				"bootstrap_data",
+				"scripts/bootstrap_data.py"
+			],
+			[
+				"model_views.py",
+				"main/model_views.py"
+			],
+			[
+				"vcf_parser",
+				"variants/vcf_parser.py"
+			],
+			[
+				"common",
+				"variants/common.py"
+			],
+			[
+				"bootstrap",
+				"scripts/bootstrap_data.py"
+			],
+			[
+				".tsv",
+				"main/templates/sample_list_targets_template.tsv"
+			],
+			[
+				"import_util_test_data",
+				"test_data/import_util_test_data/sample_list_browser_upload_test_data.tsv"
+			],
+			[
+				"common.py",
+				"variants/common.py"
+			],
+			[
+				"import",
+				"utils/import_util.py"
+			],
+			[
+				"testing_util",
+				"main/testing_util.py"
+			],
+			[
+				"test_vcf_par",
+				"variants/tests/test_vcf_parser.py"
+			],
+			[
+				".vcf",
+				"test_data/fake_genome_and_reads/test_genome_snps.vcf"
+			],
+			[
+				"consistency",
+				"main/consistency.py"
+			],
+			[
+				"dynamic",
+				"variants/dynamic_snp_filter_key_map.py"
+			],
+			[
+				"pipeline_runner",
+				"pipeline/pipeline_runner.py"
+			],
+			[
+				"test_vcf_p",
+				"variants/tests/test_vcf_parser.py"
+			],
+			[
+				"models.py",
+				"main/models.py"
+			],
+			[
+				"test_vcf_",
+				"variants/tests/test_vcf_parser.py"
+			],
+			[
+				"test_var",
+				"variants/tests/test_vcf_parser.py"
+			],
+			[
+				"test_",
+				"pipeline/tests/test_variant_calling.py"
+			],
+			[
+				"test_variant",
+				"pipeline/tests/test_variant_calling.py"
+			],
+			[
+				"main/testing_util",
+				"main/testing_util.py"
+			],
+			[
+				"main/tests/",
+				"main/tests/test_models.py"
+			],
+			[
+				"variants/tests/",
+				"variants/tests/test_common.py"
+			],
+			[
+				"testing_",
+				"main/testing_util.py"
+			],
+			[
+				"variants/",
+				"variants/common.py"
+			],
+			[
+				"vcf",
+				"variants/vcf_parser.py"
+			],
+			[
+				"alignment",
+				"pipeline/read_alignment.py"
+			],
+			[
+				"pipeline",
+				"pipeline/pipeline_runner.py"
+			],
+			[
+				"global_settings",
+				"conf/global_settings.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

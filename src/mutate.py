@@ -9,7 +9,7 @@ from itertools import chain, islice, cycle, product, \
 from bisect import bisect, bisect_left
 from numpy import array, delete
 from copy import copy, deepcopy
-from interval import interval, inf, imath
+from interval import interval
 from operator import itemgetter
 from blist import sortedset
 from collections import OrderedDict
