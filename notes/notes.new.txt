@@ -1,0 +1,1 @@
+python src/score_exons.py -i /Users/dbg/Dropbox/Projects/old/intron/data/candidate_exons/ccds_CNE_final.fasta -o /Users/dbgoodman/Dropbox/intron/data/candidate_exons -ranges chr19:45766299-45766476,chr17:78971002-78971179,chr15:94942142-94942319,chr19:16689105-16689282,chr6:150537877-150538054

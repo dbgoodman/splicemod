@@ -31,7 +31,7 @@ def default_note_str(motif_bounds, string):
 
 class SeqMotifType:
     '''
-    This function stores information and pointers to function required to score
+    This class stores information and pointers to function required to score
     and mutate certain motif types, like 3' and 5' splice sites, branch points,
     splice signals, etc, etc.
     '''
@@ -322,6 +322,10 @@ class Wiggle:
         self.fnames = \
             dict([(pattern.match(gzfile).group(1), gzfile) \
                   for gzfile in gzlist])
+
+        assert len(self.fnames) > 0, (
+                'No wiggle files found in {}'.format(file_prefix))
+
         self.idxnames = \
             dict([(pattern.match(gzfile).group(1), gzfile + r'.idx') \
                   for gzfile in gzlist])
@@ -499,11 +503,18 @@ agg_types = ['Ke2011']
 # WIGGLE DECLARATIONS
 #===============================================================================
 
-MamConserv = Wiggle(name='MamConserv',
-                        wiggle_dir='/Users/dbgoodman/Documents/Projects/' + \
-                                    'Intron/ensembl/placental_conservation',
-                        file_prefix='chr',
-                        file_suffix='.phyloP46way.placental.wigFix.gz')
+# I got these here:
+#http://hgdownload.cse.ucsc.edu/goldenpath/hg19/phyloP46way/placentalMammals/
+
+# MamConserv = Wiggle(name='MamConserv',
+#                         wiggle_dir='/Users/dbgoodman/Documents/Projects/' + \
+#                                     'Intron/ensembl/placental_conservation',
+#                         file_prefix='chr',
+#                         file_suffix='.phyloP46way.placental.wigFix.gz')
+
+# Now that we are using hg38, I am using this:
+#ftp://hgdownload.cse.ucsc.edu/goldenPath/hg38/phyloP7way/hg38.phyloP7way.wigFix.gz
+
 
 
 

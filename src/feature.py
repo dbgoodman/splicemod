@@ -41,7 +41,7 @@ def make_seq_feature(start, end, ftype, quals={}):
     may include other fields, like note, label, evidence, citation, as a dict.
     '''
 
-    seq_feature = SeqFeature(FeatureLocation(start, end), strand= +1, type=ftype)
+    seq_feature = SeqFeature(FeatureLocation(int(start), int(end)), strand= +1, type=ftype)
     seq_feature.qualifiers = quals
     seq_feature.qualifiers['source'] = ['splicemod']
     return seq_feature
