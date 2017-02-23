@@ -18,6 +18,12 @@ Note that biopython MUST be version 1.57, which is quite old, as splicemod uses
 the deprecated `motif` package. It is recommended that you install the requirements in
 a python [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
 
+## Running splicemod
+
+After installing the required data and python packages, Splicemod can be run from the base directory with the command:
+
+	`python src/ensembl.py`
+
 ## Data required
 
 * Motif definitions are included in the `data/motifs` dir.
