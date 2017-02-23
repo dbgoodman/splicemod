@@ -24,6 +24,11 @@ After installing the required data and python packages, Splicemod can be run fro
 
 	`python src/ensembl.py`
 
+This will write gbk/fas files for the natural and mutated exons to the `data/ccds_ensembl` dir. It might also be useful to save the output log to a file, like:
+
+	`python src/ensembl.py > data/2017.02.23.splicemod_output.txt`
+
+
 ## Data required
 
 * Motif definitions are included in the `data/motifs` dir.
