@@ -3,3 +3,5 @@
 data/ccds_ensembl/fas
 data/ccds_ensembl/gbk
 data/hg38.100way.phyloP100way
+*.sublime-workspace
+.DS_Store
