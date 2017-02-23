@@ -78,5 +78,5 @@ mysqlimport -u ensembl --fields_escaped_by=\\ homo_sapiens_core_78_38 -L *.txt
 
 #### Cached Exon List
 
-To speed things up, we cache a copy of all exons in the file `data/ccds_ensembl/all_hg38_size_100_CCDS_exons.sorted.txt`. This file was generated using the mySQL command in `get_ccds_exons()` function in `ensembl.py` and is hard coded with an exon size of 100. The easiest way to regenerate this file is to copy the mySQL command into a program like `Sequel Pro` and copy the result into a text file, which is pointed to in `cfg.ens_exon_fn`.
+To speed things up, we cache a copy of all exons in the file `data/ccds_ensembl/78_38_CCDS_exons.all.txt`. This file was generated using the mySQL command in `get_ccds_exons()` function in `ensembl.py` and is hard coded with an exon size of 100. The easiest way to regenerate this file is to run the mySQL query in a program like Sequel Pro and copy the result into a text file, the filename of which is pointed to in `cfg.ens_exon_fn`.
 
