@@ -1,36 +1,46 @@
-== Splicemod ==
+## Splicemod
 
 A toolkit for scoring and modifying exons and their adjacent intronic boundaries.
 
 Author: Daniel Bryan Goodman (dbg@mit.edu)
 
-=== Python Dependencies ===
+### Python Dependencies
 
 We use Python 2.7.
 
-* pyinterval
-* crlibm (for pyinterval)
-* Biopython
-* bx-python
-* acora
-* blist
-* pycogent
-* numpy
-* mysql-python
-* sqlalchemy
+Required python packages are in requirements.txt and so can be installed with:
 
-== Data required ==
+```
+pip install -r requirements.txt
+```
 
-* Motif definitions in the dropbox folder: (intron/sequences/motifs)
-* A mySQL database with the ENSEMBL database (see below for setup instructions)
+Note that biopython MUST be version 1.57, which is quite old, as splicemod uses
+the deprecated `motif` package. It is recommended that you install the requirements in
+a python [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
 
-=== Some notes ===
+## Data required
 
-We use the deprecated Bio.motif submodule of Biopython instead of the newer Bio.motifs, so you might need to use an older version of Biopython if this deprecated function gets removed some point in the future.
+* Motif definitions are included in the `data/motifs` dir.
 
-=== Ensembl Database ===
+* Ensembl mySQL database access (local or remote, see below)
 
-A local copy of the ensembl database is required for fast access. These directions are based off of the ENSEMBL guide found here:
+* Wiggle tracks for conservation. This requires approximately 5.3 Gb. These can be downloaded and indexed with
+  an included bash script:
+
+    ```
+    source scripts/get_wig.sh
+    ```
+
+### Ensembl Database
+
+#### Remote Ensembl Access
+
+Ensembl can be used remotely and the host and port can be set in `src/cfg.py`. The defaults
+currently work correctly but a list of up-to-date urls can be found [here](http://useast.ensembl.org/info/data/mysql.html).
+
+#### Local Ensembl Copy
+
+A local copy of the ensembl database can also be used for fast access. These directions are based off of the ENSEMBL guide found here:
 
 `http://useast.ensembl.org/info/docs/webcode/mirror/install/ensembl-data.html`
 
@@ -66,5 +76,7 @@ Then load all the txt data into the new schema. This takes a while.
 mysqlimport -u ensembl --fields_escaped_by=\\ homo_sapiens_core_78_38 -L *.txt
 ```
 
+#### Cached Exon List
 
+To speed things up, we cache a copy of all exons in the file `data/ccds_ensembl/all_hg38_size_100_CCDS_exons.sorted.txt`. This file was generated using the mySQL command in `get_ccds_exons()` function in `ensembl.py` and is hard coded with an exon size of 100. The easiest way to regenerate this file is to copy the mySQL command into a program like `Sequel Pro` and copy the result into a text file, which is pointed to in `cfg.ens_exon_fn`.
 
