@@ -2,6 +2,7 @@ from bx import wiggle
 from Bio import Motif
 from Bio.Seq import Seq
 from Bio.Motif.Thresholds import ScoreDistribution
+from collections import defaultdict
 import re
 import subprocess
 import acora
@@ -9,6 +10,7 @@ import gzip
 import glob
 import itertools
 import pdb
+import pickle
 import os
 
 from numpy import array, where, ones
@@ -100,27 +102,39 @@ class SeqMotifType:
 
         # positon frequency matrix list
         elif score_type == 'pfm':
-            print "Loading position frequency matrices from {}...".format(self.type)
+            print "Loading position frequency matrices from {}...".format(
+                    self.type)
             pfm_glob = glob.glob(score_dict)
             name_pattern = re.compile('.*/(\w+).pfm')
 
             self.score_dict = {}
 
-            for motif_file in pfm_glob:
-                motif_obj = Motif.read(open(motif_file), 'jaspar-pfm')
-                motif_name = name_pattern.match(motif_file).group(1)
-                print "\t{}...".format(motif_name)
-                motif_obj.name = motif_name
-                if len(motif_obj) > 7:
+            if cfg.pickle_pfms and os.path.exists(cfg.pickle_pfms):
+                motif_objs_dict = pickle.load(open(cfg.pickle_pfms, 'rb'))
+                for motif_name, motif_obj in motif_objs_dict.items():
                     self.score_dict[motif_name] = motif_obj
-                    motif_obj.sd = \
-                        ScoreDistribution(motif_obj, precision=10 ** 3)
 
-                    # low false-positive rate to make sure motifs are real
-                    motif_obj.thresh = max(1, motif_obj.sd.threshold_fpr(0.01))
+            else:
+                motif_objs_dict = {}
+
+                for motif_file in pfm_glob:
+                    motif_obj = Motif.read(open(motif_file), 'jaspar-pfm')
+                    motif_name = name_pattern.match(motif_file).group(1)
+                    print "\t{}...".format(motif_name)
+                    motif_obj.name = motif_name
+                    if len(motif_obj) > 7:
+                        self.score_dict[motif_name] = motif_obj
+                        motif_obj.sd = \
+                            ScoreDistribution(motif_obj, precision=10 ** 3)
+
+                        # low false-positive rate to make sure motifs are real
+                        motif_obj.thresh = max(1, motif_obj.sd.threshold_fpr(0.01))
+
+                if cfg.pickle_pfms:
+                    pickle.dump(motif_objs_dict, open(cfg.pickle_pfms, 'wb'))
 
             self.score = self.pfm
-            print "Motif matrices done."
+            print "Motif matrices done.\n"
 
 
 
@@ -271,13 +285,13 @@ class Wiggle:
     then in memory, it is best that the function that uses a wiggle object does
     so sequentially throughout a chromosome instead of jumping around.
 
-    Because this has been slow, I have recently (10/20/11) added a seek feature
-    using an index file for each wiggle file. I made these indices with a simple
+    Because this has been slow, I have added a seek feature using an index file
+    for each wiggle file. I made these indices with a simple
     bash one-liner.
 
     The index file looks like:
 
-    line_number \t byte_offset \t chr_pos_start
+    line_number \t byte_offset \t chr \t chr_pos_start
 
     where the first column is the position of a header line, such as:
     fixedStep chrom=chr1 start=34045 step=1
@@ -293,11 +307,9 @@ class Wiggle:
     do
         gzcat $wig \
         | grep -nb fixedStep \
-        | perl -ne 's/(\d+):(\d+).*start=(\d+).*/$1\t$2\t$3/ && print' \
+        | perl -ne 's/(\d+):(\d+).*start=(\d+).*/$1\t$2\t$3\t$4/ && print' \
         > $wig.idx
     done
-
-    (10/28/12 - thanks self from one year ago for writing this down!)
     '''
 
     def __init__(self, name, wiggle_dir, file_prefix,
@@ -315,26 +327,29 @@ class Wiggle:
 
         # associate files into a dict by chromosome name
         re_components = map(util.to_raw, glob_components)
-        re_components[-2] = "(\w+)"
+        # don't use wig files with '_'s because they are short contig
+        # and there are too many
+        re_components[-2] = "([a-zA-Z0-9]+)"
 
         pattern = re.compile(''.join(re_components))
 
         self.fnames = \
             dict([(pattern.match(gzfile).group(1), gzfile) \
-                  for gzfile in gzlist])
+                    for gzfile in gzlist if pattern.match(gzfile)])
 
         assert len(self.fnames) > 0, (
                 'No wiggle files found in {}'.format(file_prefix))
 
         self.idxnames = \
-            dict([(pattern.match(gzfile).group(1), gzfile + r'.idx') \
-                  for gzfile in gzlist])
+            dict([(pattern.match(gzfile).group(1),
+                    os.path.splitext(gzfile)[0] + r'.idx') \
+                    for gzfile in gzlist if pattern.match(gzfile)])
         self.fhandles = \
             dict([(chr, gzip.open(fn)) \
-                  for chr, fn in self.fnames.items()])
+                    for chr, fn in self.fnames.items()])
         self.fidxhandles = \
             dict([(chr, open(fn)) \
-                  for chr, fn in self.idxnames.items()])
+                    for chr, fn in self.idxnames.items()])
 
         # load the indices into a dict of chrs
         self.chridx = {}
@@ -375,6 +390,8 @@ class Wiggle:
 
         # if there are not enough lines in this wiggle set
         if next_idx_row[0] - curr_idx_row[0] < end - curr_idx_row[2]:
+            import pdb
+            pdb.set_trace()
             raise ValueError("This wiggle set is not large enough!")
 
         # get seek position, number of lines to jump, and number of lines to keep
@@ -443,8 +460,8 @@ Ke2011_ESS = SeqMotifType(type='Ke2011_ESS',
                             upstr=None,
                             invariant=[],
                             score_type='acora',
-                            score_dict=os.path.join(cfg.intronDataDir,
-                                         'sequences/motifs/Ke2011/ESSseq.txt'),
+                            score_dict=os.path.join(cfg.motifDir,
+                                         'Ke2011/ESSseq.txt'),
                             filter_score=lambda val: float(val) < 0,
                             can_consolidate=True,
                             context='exon',
@@ -456,8 +473,8 @@ Ke2011_ESE = SeqMotifType(type='Ke2011_ESE',
                             upstr=None,
                             invariant=[],
                             score_type='acora',
-                            score_dict=os.path.join(cfg.intronDataDir,
-                                         'sequences/motifs/Ke2011/ESEseq.txt'),
+                            score_dict=os.path.join(cfg.motifDir,
+                                         'Ke2011/ESEseq.txt'),
                             filter_score=lambda val: float(val) > 0,
                             can_consolidate=True,
                             context='exon',
@@ -468,8 +485,8 @@ Vlkr07_DICS = SeqMotifType(type='Vlkr07_DICS',
                             upstr=None,
                             invariant=[],
                             score_type='acora',
-                            score_dict=os.path.join(cfg.intronDataDir,
-                                         'sequences/motifs/Voelker07/DI_CS.txt'),
+                            score_dict=os.path.join(cfg.motifDir,
+                                         'Voelker07/DI_CS.txt'),
                             can_consolidate=True,
                             context='donor_intron',
                             # aggregate= 'Ke2011',
@@ -479,8 +496,8 @@ Vlkr07_AICS = SeqMotifType(type='Vlkr07_AICS',
                             upstr=None,
                             invariant=[],
                             score_type='acora',
-                            score_dict=os.path.join(cfg.intronDataDir,
-                                         'sequences/motifs/Voelker07/AI_CS.txt'),
+                            score_dict=os.path.join(cfg.motifDir,
+                                         'Voelker07/AI_CS.txt'),
                             can_consolidate=True,
                             context='acceptor_intron',
                             # aggregate= 'Ke2011',
@@ -490,10 +507,10 @@ RBPmats = SeqMotifType(type='RBPmats',
                             upstr=None,
                             invariant=[],
                             score_type='pfm',
-                            score_dict=os.path.join(cfg.intronDataDir,
-                                         'sequences/motifs/jaspar/*.pfm'),
-                            score_dist=os.path.join(cfg.intronDataDir,
-                                         'sequences/motifs/jaspar/dists.txt')
+                            score_dict=os.path.join(cfg.motifDir,
+                                         'jaspar/*.pfm'),
+                            score_dist=os.path.join(cfg.motifDir,
+                                         'jaspar/dists.txt')
                             )
 
 # aggregate type explicit declarations
@@ -503,17 +520,12 @@ agg_types = ['Ke2011']
 # WIGGLE DECLARATIONS
 #===============================================================================
 
-# I got these here:
-#http://hgdownload.cse.ucsc.edu/goldenpath/hg19/phyloP46way/placentalMammals/
+MamConserv = Wiggle(name='MamConserv',
+                        wiggle_dir=os.path.join(
+                                cfg.intronDataDir, 'hg38.100way.phyloP100way'),
+                        file_prefix='chr',
+                        file_suffix='.phyloP100way.wigFix.gz')
 
-# MamConserv = Wiggle(name='MamConserv',
-#                         wiggle_dir='/Users/dbgoodman/Documents/Projects/' + \
-#                                     'Intron/ensembl/placental_conservation',
-#                         file_prefix='chr',
-#                         file_suffix='.phyloP46way.placental.wigFix.gz')
-
-# Now that we are using hg38, I am using this:
-#ftp://hgdownload.cse.ucsc.edu/goldenPath/hg38/phyloP7way/hg38.phyloP7way.wigFix.gz
 
 
 

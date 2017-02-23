@@ -4,6 +4,7 @@ import types
 import collections
 import random
 import functools
+import numpy as np
 
 from interval import interval, inf
 
@@ -172,9 +173,16 @@ def to_raw(plain_str):
     for instance, regular expressions do not mistake a literal '.' for a 'match
     anything' character.
     '''
+
+    escape_dict = {
+        '.' : '\.',
+        '(' : '\(',
+        ')' : '\)',
+    }
+
     temp_str = "%r" % plain_str
     new_raw_str = temp_str[1:-1]
-    return new_raw_str
+    return "".join([escape_dict.get(char,char) for char in new_raw_str])
 
 def iter_len(iterable):
     return sum(1 for _ in iterable)
@@ -183,6 +191,12 @@ def max_none(iterable):
     try:
         return max(iterable)
     except ValueError:
+        return None
+
+def mean_none(iterable):
+    try:
+        return np.mean(iterable)
+    except FloatingPointError:
         return None
 
 @magic_set(interval)

@@ -1,0 +1,511 @@
+LOCUS       ENSE00000415302          170 bp    DNA              UNK 01-JAN-1980
+DEFINITION  ENSE00000415302 chr1:202333207-202333376 strand=-1 len=30.99.41
+            ccds=CCDS1425.1
+ACCESSION   ENSE00000415302
+VERSION     ENSE00000415302
+KEYWORDS    .
+SOURCE      .
+  ORGANISM  .
+            .
+FEATURES             Location/Qualifiers
+     exon            42..140
+                     /source="ensembl_exon"
+     intron          1..41
+                     /source="ensembl_exon"
+     intron          141..170
+                     /source="ensembl_exon"
+     NEW_Ke2011_ESS  57..62
+                     /note="TCCCTA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.566"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  58..63
+                     /note="CCCTAA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.467"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  59..64
+                     /note="CCTAAA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.562"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  60..65
+                     /note="CTAAAC"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.456"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  64..69
+                     /note="ACATAG"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.435"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  66..71
+                     /note="ATAGCT"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.266"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  67..72
+                     /note="TAGCTA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.812"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  71..76
+                     /note="TACAGT"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.265"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  72..77
+                     /note="ACAGTG"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.161"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  73..78
+                     /note="CAGTGT"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.196"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  75..80
+                     /note="GTGTTA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.436"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  76..81
+                     /note="TGTTAA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.439"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  84..89
+                     /note="TCTATA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.491"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  90..95
+                     /note="CAGCTT"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.379"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  106..111
+                     /note="AGCCCA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.292"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  107..112
+                     /note="GCCCAA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.363"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  111..116
+                     /note="AACCCA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.352"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  112..117
+                     /note="ACCCAG"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.227"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  113..118
+                     /note="CCCAGA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.243"
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  133..138
+                     /note="CAGATA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.309"
+                     /label="Ke2011_ESS"
+     NEW_me_splice_a 22..44
+                     /function="correct splice signal"
+                     /seq_motif_type="me_splice_acceptor"
+                     /evidence="7.51"
+                     /note="GTTCATCTGTTTGTATATAG|ggt"
+                     /source="splicemod"
+                     /label="me_splice_acceptor"
+     NEW_me_splice_a 73..95
+                     /note="CAGTGTTAACCTCTATACAG|ctt"
+                     /source="splicemod"
+                     /seq_motif_type="me_splice_acceptor"
+                     /evidence="4.51"
+                     /label="me_splice_acceptor"
+     NEW_me_splice_a 86..108
+                     /note="TATACAGCTTCTCATGTCAG|agc"
+                     /source="splicemod"
+                     /seq_motif_type="me_splice_acceptor"
+                     /evidence="3.83"
+                     /label="me_splice_acceptor"
+     NEW_me_splice_a 116..138
+                     /note="AGATGATCCTCTCATGGCAG|ata"
+                     /source="splicemod"
+                     /seq_motif_type="me_splice_acceptor"
+                     /evidence="5.9"
+                     /label="me_splice_acceptor"
+     NEW_Ke2011_ESE  48..53
+                     /note="TGGAGG"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.101"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  49..54
+                     /note="GGAGGC"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.361"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  50..55
+                     /note="GAGGCC"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.380"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  80..85
+                     /note="AACCTC"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.286"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  115..120
+                     /note="CAGATG"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.190"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  117..122
+                     /note="GATGAT"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.456"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  118..123
+                     /note="ATGATC"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.442"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  119..124
+                     /note="TGATCC"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.172"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  120..125
+                     /note="GATCCT"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.275"
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  131..136
+                     /note="GGCAGA"
+                     /source="splicemod"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.210"
+                     /label="Ke2011_ESE"
+     NEW_me_splice_d 138..146
+                     /function="correct splice signal"
+                     /seq_motif_type="me_splice_donor"
+                     /evidence="0.5"
+                     /note="ATA|gtaaat"
+                     /source="splicemod"
+                     /label="me_splice_donor"
+     Ke2011_ESS      42..49
+                     /nmers="GGTGCT"
+                     /nmers="GTGCTT"
+                     /nmers="TGCTTG"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.5895"
+                     /note="len= 8; sum=-0.786000; count=3; mean=-0.262000;
+                     avg=-0.589500;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  57..95
+                     /nmers="TCCCTa"
+                     /nmers="CCCTaA"
+                     /nmers="CCTaAA"
+                     /nmers="CTaAAC"
+                     /nmers="ACATaG"
+                     /nmers="ATaGCt"
+                     /nmers="TaGCtA"
+                     /nmers="tACaGT"
+                     /nmers="ACaGTG"
+                     /nmers="CaGTGT"
+                     /nmers="GTGTTa"
+                     /nmers="TGTTaA"
+                     /nmers="CCTCTA"
+                     /nmers="CTCTAT"
+                     /nmers="TCTATa"
+                     /nmers="CAGCTt"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-1.00307692308"
+                     /note="len= 39; sum=-6.520000; count=16; mean=-0.407500;
+                     avg=-1.003077;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  133..138
+                     /nmers="CaGAtA"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.309"
+                     /note="len= 6; sum=-0.309000; count=1; mean=-0.309000;
+                     avg=-0.309000;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Ke2011_ESS"
+     NEW_Ke2011_ESS  100..118
+                     /nmers="TGTCAG"
+                     /nmers="AgCCCA"
+                     /nmers="gCCCAA"
+                     /nmers="AACCCa"
+                     /nmers="ACCCaG"
+                     /nmers="CCCaGA"
+                     /seq_motif_type="Ke2011_ESS"
+                     /evidence="-0.603157894737"
+                     /note="len= 19; sum=-1.910000; count=6; mean=-0.318333;
+                     avg=-0.603158;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Ke2011_ESS"
+     Vlkr07_AICS     2..15
+                     /nmers="TTCTA"
+                     /nmers="ATTCTAA"
+                     /nmers="TTCTAA"
+                     /nmers="TCTAA"
+                     /nmers="TTCTAAT"
+                     /nmers="TCTAAT"
+                     /nmers="ATAAAA"
+                     /nmers="TAAAA"
+                     /seq_motif_type="Vlkr07_AICS"
+                     /evidence="23.2474821429"
+                     /note="len= 14; sum=55.635000; count=8; mean=6.954375;
+                     avg=23.247482;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Vlkr07_AICS"
+     Vlkr07_AICS     20..25
+                     /nmers="CTGTT"
+                     /nmers="TGTTC"
+                     /seq_motif_type="Vlkr07_AICS"
+                     /evidence="8.122725"
+                     /note="len= 6; sum=8.331000; count=2; mean=4.165500;
+                     avg=8.122725;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Vlkr07_AICS"
+     Vlkr07_AICS     27..35
+                     /nmers="TCTGTT"
+                     /nmers="CTGTT"
+                     /nmers="TCTGTTT"
+                     /nmers="CTGTTT"
+                     /nmers="TGTTT"
+                     /nmers="CTGTTTG"
+                     /nmers="TGTTTG"
+                     /nmers="TGTTTGT"
+                     /nmers="GTTTGT"
+                     /nmers="TTTGT"
+                     /seq_motif_type="Vlkr07_AICS"
+                     /evidence="47.5384"
+                     /note="len= 9; sum=73.136000; count=10; mean=7.313600;
+                     avg=47.538400;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Vlkr07_AICS"
+     NEW_Ke2011_ESE  115..125
+                     /nmers="CaGATG"
+                     /nmers="GATGAt"
+                     /nmers="ATGAtC"
+                     /nmers="TGAtCC"
+                     /nmers="GAtCCt"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.837272727273"
+                     /note="len= 11; sum=1.535000; count=5; mean=0.307000;
+                     avg=0.837273;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  48..55
+                     /nmers="TGGAGg"
+                     /nmers="GGAGgC"
+                     /nmers="GAGgCC"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.6315"
+                     /note="len= 8; sum=0.842000; count=3; mean=0.280667;
+                     avg=0.631500;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  80..85
+                     /nmers="aACCTC"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.286"
+                     /note="len= 6; sum=0.286000; count=1; mean=0.286000;
+                     avg=0.286000;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Ke2011_ESE"
+     NEW_Ke2011_ESE  131..136
+                     /nmers="GGCaGA"
+                     /seq_motif_type="Ke2011_ESE"
+                     /evidence="0.21"
+                     /note="len= 6; sum=0.210000; count=1; mean=0.210000;
+                     avg=0.210000;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Ke2011_ESE"
+     Vlkr07_DICS     152..157
+                     /nmers="CATTT"
+                     /nmers="CATTTT"
+                     /seq_motif_type="Vlkr07_DICS"
+                     /evidence="8.3468"
+                     /note="len= 6; sum=8.943000; count=2; mean=4.471500;
+                     avg=8.346800;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Vlkr07_DICS"
+     Vlkr07_DICS     141..147
+                     /nmers="GTAAAT"
+                     /nmers="TAAAT"
+                     /nmers="TAAATA"
+                     /seq_motif_type="Vlkr07_DICS"
+                     /evidence="11.668"
+                     /note="len= 7; sum=14.585000; count=3; mean=4.861667;
+                     avg=11.668000;"
+                     /source="splicemod"
+                     /meta=True
+                     /label="Vlkr07_DICS"
+     variation       161
+                     /alleles="G/A"
+                     /symbol="rs12118491"
+                     /pep
+                     /label="variation"
+                     /note="intron_variant"
+                     /note="non_coding_transcript_exon_variant"
+                     /note="non_coding_transcript_variant"
+                     /source="splicemod"
+     variation       139
+                     /alleles="A/G"
+                     /symbol="rs146752001"
+                     /pep="I/T"
+                     /label="variation"
+                     /note="splice_region_variant"
+                     /note="non_coding_transcript_exon_variant"
+                     /note="missense_variant"
+                     /note="non_coding_transcript_variant"
+                     /source="splicemod"
+     variation       133
+                     /alleles="G/A"
+                     /symbol="rs201271123"
+                     /pep="A/V"
+                     /label="variation"
+                     /note="non_coding_transcript_exon_variant"
+                     /note="missense_variant"
+                     /note="non_coding_transcript_variant"
+                     /source="splicemod"
+     variation       125
+                     /alleles="C/T"
+                     /symbol="rs373472481"
+                     /pep
+                     /label="variation"
+                     /note="synonymous_variant"
+                     /note="non_coding_transcript_variant"
+                     /note="non_coding_transcript_exon_variant"
+                     /source="splicemod"
+     variation       125
+                     /alleles="C/G"
+                     /symbol="COSM386208"
+                     /pep
+                     /label="variation"
+                     /note="synonymous_variant"
+                     /note="non_coding_transcript_variant"
+                     /note="non_coding_transcript_exon_variant"
+                     /source="splicemod"
+     variation       68
+                     /alleles="G/A"
+                     /symbol="rs200250191"
+                     /pep
+                     /label="variation"
+                     /note="synonymous_variant"
+                     /note="non_coding_transcript_variant"
+                     /note="non_coding_transcript_exon_variant"
+                     /source="splicemod"
+     variation       68
+                     /alleles="G/A"
+                     /symbol="COSM1337901"
+                     /pep
+                     /label="variation"
+                     /note="synonymous_variant"
+                     /note="non_coding_transcript_variant"
+                     /note="non_coding_transcript_exon_variant"
+                     /source="splicemod"
+     variation       67
+                     /alleles="A/G"
+                     /symbol="COSM1689627"
+                     /pep="I/T"
+                     /label="variation"
+                     /note="non_coding_transcript_exon_variant"
+                     /note="missense_variant"
+                     /note="non_coding_transcript_variant"
+                     /source="splicemod"
+     variation       20
+                     /alleles="G/A"
+                     /symbol="rs376533913"
+                     /pep
+                     /label="variation"
+                     /note="intron_variant"
+                     /note="non_coding_transcript_variant"
+                     /source="splicemod"
+     variation       18
+                     /alleles="T/A"
+                     /symbol="rs371025959"
+                     /pep
+                     /label="variation"
+                     /note="intron_variant"
+                     /note="non_coding_transcript_variant"
+                     /source="splicemod"
+     variation       9
+                     /alleles="A/G"
+                     /symbol="rs376507405"
+                     /pep
+                     /label="variation"
+                     /note="intron_variant"
+                     /note="non_coding_transcript_variant"
+                     /source="splicemod"
+     NEW_mutant      42..140
+                     /MaxIterReached="True"
+                     /set="[((52, 53), 'G'), ((61, 62), 'A'), ((67, 68), 'A'),
+                     ((70, 71), 'T'), ((73, 74), 'A'), ((79, 80), 'A'), ((88,
+                     89), 'A'), ((94, 95), 'T'), ((106, 107), 'G'), ((115, 116),
+                     'A'), ((121, 122), 'T'), ((124, 125), 'T'), ((133, 134),
+                     'A'), ((136, 137), 'T')]"
+                     /orig_score="11.371"
+                     /new_score="2.873"
+                     /label="rmv_Ke2011_ESE"
+                     /source="splicemod"
+                     /criteria_met="False"
+                     /str="GGTGCTTGGAGgCCATCCCTaAACATaGCtACaGTGTTaACCTCTATaCAGCT
+                     tCTCATGTCAGAgCCCAACCCaGATGAtCCtCTCATGGCaGAtATA"
+                     /changes="14"
+                     /NoNewMutants="True"
+ORIGIN
+        1 cattctaata taaaagcaac tgttcatctg tttgtatata gggtgcttgg aggccatccc
+       61 taaacatagc tacagtgtta acctctatac agcttctcat gtcagagccc aacccagatg
+      121 atcctctcat ggcagatata gtaaatatcc ccattttcct ctgcaacaca
+//

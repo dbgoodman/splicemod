@@ -19,7 +19,7 @@ import cfg
 import stats
 
 ens_release = cfg.ens_release
-db = MySQLdb.connect(**cfg.ens_lcl_db_dict)
+db = MySQLdb.connect(**cfg.ens_rmt_db_dict)
 
 # pycog = HostAccount(cfg.ens_lcl_db_dict['host'],
 #                    cfg.ens_lcl_db_dict['user'],
@@ -96,11 +96,13 @@ def categorize_exons(synth_size=cfg.chip_synth_length,
     # get random sample to perform mutations on
     random.seed(1)
     sample_indices = sorted(random.sample(range(len(all_exons)),
-                            number_to_mutate))
+                            min(len(all_exons), number_to_mutate)))
 
     # \/ if we want to get them from mySQL
-    # for i, ccds_ex in enumerate(get_ccds_exons(synth_size - us_min - ds_min)):
-    # \/ if we want to get them from a file
+    #for i, ccds_ex in enumerate(get_ccds_exons(synth_size - us_min - ds_min)):
+
+
+    # \/ if we want to get them from the ens_exon_fn file cache (in cfg.py)
     for i, ccds_ex in enumerate(all_exons):
 
         #------------------------------------------------------------------
@@ -134,7 +136,7 @@ def categorize_exons(synth_size=cfg.chip_synth_length,
         #     subsumed, overlapped, or identical
         #------------------------------------------------------------------
 
-        # if 'ENSE00001316627' not in ccds_ex['exon']: continue
+        #if 'ENSE00001362516' not in ccds_ex['exon']: continue
 
         for fg in glob.glob(cfg.ens_fas_dir + '*'):
             if ccds_ex['exon'] in fg:
@@ -200,9 +202,6 @@ def categorize_exons(synth_size=cfg.chip_synth_length,
 
             re_ex['invalid'] = False
             re_ex['class'] = 'error'
-
-            import pdb
-            pdb.set_trace
 
             # region exon (this loop)
             re_ivl = interval[re_ex['start'], re_ex['end']]
@@ -356,6 +355,7 @@ def add_wiggle_data(exon_record):
 
         exon_record.add_wiggle_track(wig_tr.name, map(lambda v: v[4], values))
 
+
 def make_seq_record(exon, skip_annotation=False):
     ''' use pycogent to grab the sequence for the exon's region, and create a
         new seq record with all the bells and whistles. add in the predicted
@@ -494,12 +494,10 @@ def get_ccds_exons(max_size):
          ex.seq_region_end as 'end',
          ex.stable_id as 'exon',
          GROUP_CONCAT(xr.display_label) as 'CCDS',
-         GROUP_CONCAT(tsid.stable_id) as 'transcript_ids',
          GROUP_CONCAT(exts.rank) as 'ranks',
          ex.seq_region_end - ex.seq_region_start + 1 as 'len',
          ex.seq_region_strand as 'strand'
     from
-         transcript_stable_id as tsid,
          transcript as ts,
          exon as ex,
          exon_transcript as exts,
@@ -516,10 +514,9 @@ def get_ccds_exons(max_size):
          ex.end_phase = 0 and
          ((ex.seq_region_end - ex.seq_region_start + 1) > 12 AND
           (ex.seq_region_end - ex.seq_region_start + 1) < %d) and
-         tsid.transcript_id = ts.transcript_id and   #transcript stable id
          ex.exon_id = exts.exon_id  and              #exon details
          seq_region.seq_region_id = ex.seq_region_id #seq region name
-    GROUP BY exsid.stable_id
+    GROUP BY ex.stable_id
     LIMIT 100;
     ''' % (max_size)
 

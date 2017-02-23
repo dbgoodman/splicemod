@@ -2,6 +2,8 @@ biopython==1.57
 numpy
 pyinterval==1.0
 bx-python
-wiggle
 acora
 blist
+MySQL
+cogent
+sqlalchemy

@@ -15,18 +15,18 @@ from numpy import array
 # general parameters
 #===============================================================================
 
-# intron dropbox dir that contains sequence info
-intronDataDir = '/Users/dbg/Dropbox/Projects/old/intron/'
-
 # where all this stuff should happen, usually one dir up from the src/ dir
 topDir = os.getcwd() + '/'
+
+# intron dropbox dir that contains sequence info
+intronDataDir = os.path.join(topDir, 'data')
 
 # not currently used
 logFile = ('%s/parseFASTA.log' % topDir)
 
 #####maxEnt Settings
 # path to maxEnt executable
-maxEntPath = topDir + "perl_utils/max_ent"
+maxEntPath = os.path.join(topDir, "perl_utils/max_ent")
 
 # donor input lengths for MaxEnt
 maxEntBounds = {'me_donor': array([-3, 6]),
@@ -60,7 +60,10 @@ minPPT3prime = 2  # minimum distance upstream of AG for ppt to end (incl AG)
 minPPTpctCT = 0.5  # minimum percentage CT in PPT
 
 ######motif-finder Settings
-motifDir = topDir + "/sequences/motifs/"
+motifDir = os.path.join(intronDataDir, 'motifs/')
+
+######use pre-loaded pickled motifs
+pickle_pfms = os.path.join(intronDataDir, 'motifs/motifs.pickle')
 
 ######context Settings
 # NOTE: Currently not using...
@@ -95,7 +98,6 @@ MUT_META_MUT_PER_ITER = 2
 
 # mammalian conservation settings
 MAM_CONSERV_MIN_WINDOW_SCORE = 0.6
-
 
 #####score_exons/generate_mutant Settings
 
@@ -149,18 +151,23 @@ ens_lcl_db_dict = {'host':  "127.0.0.1",
                    #'db':     "homo_sapiens_core_63_37"}
                    'db':     "homo_sapiens_core_78_38"}
 
-ens_rmt_db_dict = {'host': 'useastdb.ensembl.org',
+ens_rmt_db_dict = {'host': 'ensembldb.ensembl.org',
                    'user': 'anonymous',
-                   'port': 5306,
+                   'port': 3306,
+                   'db': "homo_sapiens_core_78_38",
                    'passwd': ''}
 
-ens_data_dir = os.path.join(intronDataDir, 'data/ccds_ensembl/')
-ens_gbk_dir = ens_data_dir + 'gbk/'
-ens_fas_dir = ens_data_dir + 'fas/'
-# ens_exon_fn = ens_data_dir + 'all_CCDS_exons.sorted.tsv'
-ens_exon_fn = ens_data_dir + '11.27.12.all_111_CCDS_exons.sorted.txt'
+ens_data_dir = os.path.join(intronDataDir, 'ccds_ensembl/')
+ens_gbk_dir = os.path.join(ens_data_dir, 'gbk/')
+ens_fas_dir = os.path.join(ens_data_dir, 'fas/')
+
+# this file is read from:
+print ens_data_dir
+
+ens_exon_fn = os.path.join(ens_data_dir, '78_38_CCDS_exons.all.txt')
+
+# this file is written to:
 ens_exon_stats = ens_data_dir + '1000_CCDS_exon_stats.txt'
-ens_mutstats_fn = ens_data_dir + 'CCDS_exon_mutants.txt'
 
 cut_sites = ['GGCGCGCC',
              'TTAATTAA']
@@ -194,6 +201,7 @@ chip_ds_min = 30
 
 # there must be this much intronic space before/after exon
 chip_intron_padding = 50
+
 # number of exons to choose (randomly) to mutate
 chip_number_to_mutate = 305
 
