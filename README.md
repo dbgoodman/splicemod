@@ -10,7 +10,7 @@ We use Python 2.7.
 
 Required python packages are in requirements.txt and so can be installed with:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
@@ -18,9 +18,25 @@ Note that biopython MUST be version 1.57, which is quite old, as splicemod uses
 the deprecated `motif` package. It is recommended that you install the requirements in
 a python [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
 
+### Bash commands for set-up
+
+Read below for more info, but this set of commands should set up your virtual environment,
+install the packages, and download the wiggle tracks:
+
+```bash
+#choose a virtual environment dir and set it up
+venv_dir= ~/.pyenv/splicemod-venv
+virtualenv $venv_dir
+source $venv_dir/bin/activate
+
+# from the splicemod dir:
+pip install -r requirements.txt
+source scripts/get_wig.sh
+```
+
 ## Running splicemod
 
-After installing the required data and python packages, Splicemod can be run from the base directory with the command:
+After installing the required data (see below) and python packages, Splicemod can be run from the base directory with the command:
 
 	`python src/ensembl.py`
 
@@ -38,9 +54,9 @@ This will write gbk/fas files for the natural and mutated exons to the `data/ccd
 * Wiggle tracks for conservation. This requires approximately 5.3 Gb. These can be downloaded and indexed with
   an included bash script:
 
-    ```
-    source scripts/get_wig.sh
-    ```
+```bash
+source scripts/get_wig.sh
+```
 
 ### Ensembl Database
 
@@ -57,7 +73,7 @@ A local copy of the ensembl database can also be used for fast access. These dir
 
 Download the ENSEMBL sql files for both *core* and * from the Ensembl FTP site and unzip them:
 
-```
+```bash
 mkdir -p /path/to/ensembl_db_dir/core
 mkdir -p /path/to/ensembl_db_dir/variation
 cd /path/to/ensembl_db_dir/core
@@ -75,7 +91,7 @@ create database homo_sapiens_core_78_38;
 
 Then load the schema. I created a user called ensembl and gave it full access to the new db.
 
-```
+```bash
 mkdir -p /path/to/ensembl_db_dir/core
 mysql -u ensembl homo_sapiens_core_78_38 < homo_sapiens_core_78_38.sql
 mkdir -p /path/to/ensembl_db_dir/variation
